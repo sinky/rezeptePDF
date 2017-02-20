@@ -40,7 +40,7 @@ request(rezepteUrl, function (error, response, html) {
     console.log('loaded', rezepteUrl, 'with status code', 200);
 
     var $ = cheerio.load(html);
-    var $a = $('.content ul').first().find('a');
+    var $a = $('.content ul.filter').find('a');
 
     console.log('found', $a.length, '"a" elements. first url is', $a.first().attr('href'));
     
@@ -75,7 +75,7 @@ function saveUrlToPDF(data, callback) {
   console.log('saving', id, url);
 
   var command = [
-    path.join(__dirname, 'bin', 'wkhtmltopdf.exe'),
+    '"' + path.join(__dirname, 'bin', 'wkhtmltopdf.exe') + '"',
     '--quiet',
     '--print-media-type',
     '--header-center', '"[title]"',
@@ -84,9 +84,9 @@ function saveUrlToPDF(data, callback) {
     '--footer-right', '"[page]/[topage]"',
     '--footer-font-size', '10',
     url,
-    fileName
+    '"' + fileName + '"'
   ].join(' ');
-
+  
   var child = exec(command);
 
   child.stdout.on('data', function(data) {
@@ -107,11 +107,11 @@ function mergePDFs() {
   var fileName = path.join(workDir, '_rezepte.pdf');
 
   var command = [
-    path.join(__dirname, 'bin', 'pdftk.exe'),
-    path.join(workDir, '*.pdf'),
+    '"' + path.join(__dirname, 'bin', 'pdftk.exe') + '"',
+    '"' + path.join(workDir, '*.pdf') + '"',
     'cat',
     'output',
-    rezeptePDFPath
+    '"' + rezeptePDFPath + '"'
   ].join(' ');
 
   var child = exec(command);
