@@ -77,10 +77,11 @@ function saveUrlToPDF(data, callback) {
   var command = [
     '"' + path.join(__dirname, 'bin', 'wkhtmltopdf.exe') + '"',
     '--quiet',
+    '--disable-smart-shrinking',
     '--print-media-type',
-    '--header-center', '"[title]"',
+    '--header-center', '""',
     '--header-font-size', '10',
-    '--footer-center', '""',
+    '--footer-center', '"[title]"',
     '--footer-right', '"[page]/[topage]"',
     '--footer-font-size', '10',
     url,
