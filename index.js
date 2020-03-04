@@ -6,7 +6,8 @@ var request = require('request');
 var cheerio = require("cheerio");
 var async = require("async");
 
-var rezepteUrl = 'https://my-azur.de/brain/rezepte/start';
+//var rezepteUrl = 'https://my-azur.de/brain/rezepte/start';
+var rezepteUrl = 'https://my-azur.de/brain/pub/rezepte-link-liste';
 var rezeptePDFPath = path.join(__dirname, 'rezepte.pdf');
 
 var queueWorkers = 10;
@@ -16,10 +17,10 @@ var workDir = path.join(__dirname, 'tmp');
  * queue
 */
 var queue = async.queue(saveUrlToPDF, queueWorkers);
-queue.drain = function() {
+queue.drain(function() {
   console.log('all items have been processed');
   mergePDFs();
-}
+});
 
 
 /*
