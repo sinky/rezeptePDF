@@ -4,10 +4,10 @@
   "description": "my-azur.de/brain Rezepte to PDF",
   "main": "index.js",
   "dependencies": {
-    "async": "^1.4.2",
-    "cheerio": "^0.19.0",
-    "request": "^2.61.0",
-    "underscore": "^1.8.3"
+    "async": "^3.2.0",
+    "cheerio": "^0.22.0",
+    "request": "^2.88.2",
+    "underscore": "^1.9.2""
   },
   "devDependencies": {},
   "scripts": {
